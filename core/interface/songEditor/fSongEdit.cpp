@@ -943,6 +943,22 @@ void cSongEditor::changeSongPositionSelection(int16_t value)
     refreshSongPlayerSelectedSlot();
 }
 
+void cSongEditor::goToSongTop()
+{
+    if (SE->editMode == 0)
+    {
+        if (!sequencer.isStop())
+        {
+            return;
+        }
+    }
+
+    selectedSongPosition = 0;
+
+    refreshPatternsList();
+    refreshSongPlayerSelectedSlot();
+}
+
 //======================================================================================================================
 //==============================================================================================
 void cSongEditor::refreshEditMode()
@@ -1649,7 +1665,7 @@ static void functInsert()
         switch (SE->selectedPlace)
         {
             case 0: SE->walkOnSongPlayer(playerHome); break;
-            case 1: SE->changeSongPositionSelection(-300); break;
+            case 1: SE->goToSongTop(); break;
         }
     }
 }
